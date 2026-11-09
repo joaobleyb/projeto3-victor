@@ -1,0 +1,19 @@
+{% extends 'atendimentos/base.html' %}
+{% block title %}{{ titulo }}{% endblock %}
+{% block content %}
+  <h2>{{ titulo }}</h2>
+  {% if consulta %}
+    <p><strong>Paciente:</strong> {{ consulta.paciente }}<br>
+       <strong>Médico:</strong> {{ consulta.medico }}<br>
+       <strong>Data/Horário:</strong> {{ consulta.data|date:"d/m/Y" }} às {{ consulta.horario|time:"H:i" }}</p>
+  {% endif %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}
+      <p>{{ field.label_tag }} {{ field }} {{ field.errors }}</p>
+    {% endfor %}
+    <button type="submit" class="btn">Salvar</button>
+    <a href="{{ voltar_url }}" class="btn sec">Cancelar</a>
+  </form>
+{% endblock %}

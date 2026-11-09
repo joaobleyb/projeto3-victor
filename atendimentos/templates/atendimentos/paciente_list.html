@@ -1,0 +1,20 @@
+{% extends 'atendimentos/base.html' %}
+{% block title %}Pacientes{% endblock %}
+{% block content %}
+  <div class="topo"><h2>Pacientes</h2><a href="{% url 'paciente_create' %}" class="btn">+ Novo paciente</a></div>
+  <div class="tabela"><table>
+    <tr><th>Nome</th><th>CPF</th><th>Nascimento</th><th>Telefone</th><th>Ações</th></tr>
+    {% for p in object_list %}
+      <tr>
+        <td>{{ p.nome }}</td><td>{{ p.cpf }}</td><td>{{ p.data_nascimento|date:"d/m/Y" }}</td><td>{{ p.telefone }}</td>
+        <td>
+          <a href="{% url 'consulta_list' %}?paciente={{ p.pk }}" class="btn peq sec">Consultas</a>
+          <a href="{% url 'paciente_update' p.pk %}" class="btn peq">Editar</a>
+          <a href="{% url 'paciente_delete' p.pk %}" class="btn peq perigo">Excluir</a>
+        </td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="5">Nenhum paciente cadastrado.</td></tr>
+    {% endfor %}
+  </table></div>
+{% endblock %}

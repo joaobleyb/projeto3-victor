@@ -1,0 +1,13 @@
+{% extends 'atendimentos/base.html' %}
+{% block title %}Especialidades{% endblock %}
+{% block content %}
+  <div class="topo"><h2>Especialidades</h2><a href="{% url 'especialidade_create' %}" class="btn">+ Nova especialidade</a></div>
+  <div class="tabela"><table>
+    <tr><th>Nome</th><th>Descrição</th><th>Médicos</th></tr>
+    {% for e in object_list %}
+      <tr><td>{{ e.nome }}</td><td>{{ e.descricao|default:"-" }}</td><td>{{ e.num_medicos }}</td></tr>
+    {% empty %}
+      <tr><td colspan="3">Nenhuma especialidade cadastrada.</td></tr>
+    {% endfor %}
+  </table></div>
+{% endblock %}

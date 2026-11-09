@@ -1,0 +1,11 @@
+{% extends 'atendimentos/base.html' %}
+{% block title %}{{ titulo }}{% endblock %}
+{% block content %}
+  <h2>{{ titulo }}</h2>
+  <p>Tem certeza que deseja excluir <strong>{{ object }}</strong>?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn perigo">Excluir</button>
+    <a href="{{ voltar_url }}" class="btn sec">Cancelar</a>
+  </form>
+{% endblock %}

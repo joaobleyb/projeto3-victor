@@ -1,0 +1,20 @@
+{% extends 'atendimentos/base.html' %}
+{% block title %}Médicos{% endblock %}
+{% block content %}
+  <div class="topo"><h2>Médicos</h2><a href="{% url 'medico_create' %}" class="btn">+ Novo médico</a></div>
+  <div class="tabela"><table>
+    <tr><th>Nome</th><th>Especialidade</th><th>CRM</th><th>Telefone</th><th>Ações</th></tr>
+    {% for m in object_list %}
+      <tr>
+        <td>{{ m.nome }}</td><td>{{ m.especialidade.nome }}</td><td>{{ m.crm }}</td><td>{{ m.telefone }}</td>
+        <td>
+          <a href="{% url 'consulta_list' %}?medico={{ m.pk }}" class="btn peq sec">Consultas</a>
+          <a href="{% url 'medico_update' m.pk %}" class="btn peq">Editar</a>
+          <a href="{% url 'medico_delete' m.pk %}" class="btn peq perigo">Excluir</a>
+        </td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="5">Nenhum médico cadastrado.</td></tr>
+    {% endfor %}
+  </table></div>
+{% endblock %}
