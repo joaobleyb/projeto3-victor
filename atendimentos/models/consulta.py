@@ -1,45 +1,8 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 
-
-class Especialidade(models.Model):
-    nome = models.CharField(max_length=100, unique=True)
-    descricao = models.TextField('descrição', blank=True)
-
-    class Meta:
-        ordering = ['nome']
-
-    def __str__(self):
-        return self.nome
-
-
-class Paciente(models.Model):
-    nome = models.CharField(max_length=150)
-    cpf = models.CharField('CPF', max_length=14, unique=True)
-    data_nascimento = models.DateField('data de nascimento')
-    telefone = models.CharField(max_length=20)
-
-    class Meta:
-        ordering = ['nome']
-
-    def __str__(self):
-        return self.nome
-
-
-class Medico(models.Model):
-    nome = models.CharField(max_length=150)
-    especialidade = models.ForeignKey(
-        Especialidade, on_delete=models.PROTECT, related_name='medicos'
-    )
-    crm = models.CharField('CRM', max_length=20, unique=True)
-    telefone = models.CharField(max_length=20)
-
-    class Meta:
-        ordering = ['nome']
-        verbose_name = 'médico'
-
-    def __str__(self):
-        return f'{self.nome} ({self.especialidade})'
+from .medico import Medico
+from .paciente import Paciente
 
 
 class Consulta(models.Model):

@@ -84,13 +84,34 @@ python manage.py test atendimentos
 ```
 ├── clinica/                 # Configurações do projeto Django
 ├── atendimentos/            # App principal
-│   ├── models.py            # Modelos e regra de conflito de horário
-│   ├── forms.py             # Formulários
-│   ├── views.py             # Views (class-based views)
+│   ├── models/              # Modelos (um arquivo por classe)
+│   │   ├── especialidade.py
+│   │   ├── paciente.py
+│   │   ├── medico.py
+│   │   └── consulta.py      # Inclui a regra de conflito de horário
+│   ├── views/               # Views (class-based views)
+│   │   ├── mixins.py        # Comportamentos compartilhados
+│   │   ├── especialidade.py
+│   │   ├── paciente.py
+│   │   ├── medico.py
+│   │   └── consulta.py
+│   ├── forms/               # Formulários
+│   │   ├── especialidade.py
+│   │   ├── paciente.py
+│   │   ├── medico.py
+│   │   └── consulta.py
+│   ├── templates/atendimentos/
+│   │   ├── base.html        # Layout principal
+│   │   ├── comum/           # Formulário e confirmação de exclusão genéricos
+│   │   ├── especialidades/
+│   │   ├── pacientes/
+│   │   ├── medicos/
+│   │   └── consultas/
+│   ├── static/atendimentos/css/style.css
+│   ├── migrations/          # Migrações do banco de dados
 │   ├── urls.py              # Rotas
 │   ├── admin.py             # Painel administrativo
-│   ├── tests.py             # Testes automatizados
-│   └── templates/           # Páginas HTML
+│   └── tests.py             # Testes automatizados
 ├── manage.py
 └── requirements.txt
 ```
